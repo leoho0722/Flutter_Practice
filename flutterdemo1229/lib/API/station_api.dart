@@ -17,7 +17,7 @@ class Station {
 Future <List<Station>> fetchAQI() async {
   List<Station> stations = [];
   final response = await http.get(Uri.parse(
-    'https://data.epa.gov.tw/api/v1/aqx_p_432?format=json&offset=0&limit=100&api_key=cafdaec2-c961-4a00-9138-6c657a2a2895'
+    'https://data.epa.gov.tw/api/v1/aqx_p_432?format=json&offset=0&limit=100&api_key=b9f719ba-1a67-4e64-a9e1-dc3604496c6a'
   ));
 
   debugPrint("Response Gotten");
