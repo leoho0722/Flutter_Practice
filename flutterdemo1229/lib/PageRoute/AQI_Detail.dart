@@ -25,13 +25,17 @@ class AQIListDetail extends StatelessWidget {
     }
     return Scaffold(
       appBar: AppBar(title: const Text("AQI Detail"),),
-      body: Column(
-        children: [
-          Text("City Name: $cityName", style: const TextStyle(color: Colors.black),),
-          Text("AQI Value: $aqiPoint", style: const TextStyle(color: Colors.black),),
-          Text(airState, style: TextStyle(color: aqiBackgroundColor),),
-        ],
-      ),
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text("City Name: $cityName", style: const TextStyle(color: Colors.black),),
+            Text("AQI Value: $aqiPoint", style: const TextStyle(color: Colors.black),),
+            Text(airState, style: TextStyle(color: aqiBackgroundColor),),
+          ],
+        ),
+        alignment: Alignment.center,
+      ), 
     );
   }
 }

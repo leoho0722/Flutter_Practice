@@ -50,11 +50,11 @@ class _AQIListState extends State<AQIList> {
         future: futureStationList,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data);
+            debugPrint('${snapshot.data}');
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                print("build: $index");
+                debugPrint("build: $index");
 
                 if (snapshot.data![index].aqi >= 0 && snapshot.data![index].aqi <=50) {
                   aqiTextBackgroundColor = Colors.green;
@@ -75,9 +75,14 @@ class _AQIListState extends State<AQIList> {
 
                 return ListTile(
                   title: Text(snapshot.data![index].siteName,),
-                  subtitle: Text(
-                    snapshot.data![index].aqi.toString(), 
-                    style: TextStyle(color: Colors.white, backgroundColor: aqiTextBackgroundColor,),
+                  subtitle: Container(
+                    constraints: const BoxConstraints(minWidth: 10, minHeight: 10, maxWidth: 20, maxHeight: 20) ,
+                    padding: const EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
+                    child: Text(
+                      snapshot.data![index].aqi.toString(), 
+                      style: TextStyle(color: Colors.white, backgroundColor: aqiTextBackgroundColor,),
+                    ),
+                    alignment: Alignment.centerLeft,
                   ),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => AQIListDetail(
@@ -101,6 +106,6 @@ class _AQIListState extends State<AQIList> {
           );
         }
       ),
-    );
+    ); 
   }
 }
