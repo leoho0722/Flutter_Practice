@@ -36,8 +36,6 @@ class AQIList extends StatefulWidget {
 class _AQIListState extends State<AQIList> {
   Future<List<Station>>? futureStationList;
   late Color aqiTextBackgroundColor;
-  String stationName = "";
-  String stationAQI = "";
 
   @override
   void initState() {
@@ -70,29 +68,33 @@ class _AQIListState extends State<AQIList> {
                   aqiTextBackgroundColor = Colors.redAccent.shade700;
                 }
 
-                stationName = snapshot.data![index].siteName;
-                stationAQI = snapshot.data![index].aqi.toString();
-
                 return ListTile(
-                  title: Text(snapshot.data![index].siteName,),
+                  title: Text(snapshot.data![index].siteName,textAlign: TextAlign.center,),
                   subtitle: Container(
-                    constraints: const BoxConstraints(minWidth: 10, minHeight: 10, maxWidth: 20, maxHeight: 20) ,
+                    constraints: const BoxConstraints(maxWidth: 10, maxHeight: 20),
                     padding: const EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 0),
+                    decoration: BoxDecoration(
+                      color: aqiTextBackgroundColor,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)
+                      ),
+                    ),
                     child: Text(
                       snapshot.data![index].aqi.toString(), 
-                      style: TextStyle(color: Colors.white, backgroundColor: aqiTextBackgroundColor,),
+                      style: TextStyle(color: Colors.black, backgroundColor: aqiTextBackgroundColor,),
+                      textAlign: TextAlign.center,
                     ),
-                    alignment: Alignment.centerLeft,
                   ),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => AQIListDetail(
-                      cityName: stationName,
-                      aqiPoint: stationAQI,
-                      aqiBackgroundColor: aqiTextBackgroundColor,
+                      cityName: snapshot.data![index].siteName,
+                      aqiPoint: snapshot.data![index].aqi.toString(),
                     )));
-                    debugPrint("City Name: $stationName");
-                    debugPrint("City AQI: $stationAQI");
-                    debugPrint("City AQI2: ${stationAQI.toString()}");
+                    debugPrint("City Name: ${snapshot.data![index].siteName}");
+                    debugPrint("City AQI: ${snapshot.data![index].aqi}");
                   },
                   trailing: const Icon(Icons.navigate_next),
                 );
